@@ -1,0 +1,7 @@
+ui/node_modules/
+ui/dist/
+api/.venv/
+api/.env
+__pycache__/
+*.pyc
+.DS_Store
