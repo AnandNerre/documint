@@ -1,8 +1,6 @@
 # DocuMint
 
-**DocuMint** — read any document, any language. Private OCR, smart parsing, Excel export.
-
-Part of the [Yaworldu](https://github.com) family (parent company — only shown in the site footer).
+**DocuMint** by **Yaworldu** — read any document, any language. Private OCR, smart parsing, Excel export.
 
 Upload any document (PDF or image) → open-source OCR reads the text → smart pattern matching pulls out fields → review on screen → download Excel.
 
@@ -63,11 +61,11 @@ DocuMint is a **local web app** — you open it in your browser on your own comp
 
 | What | Where | Cost |
 |------|-------|------|
-| **Company site** (About, Careers) | [Wix](https://wix.com) free → `yaworldu.wixsite.com` | $0 |
+| **Yaworldu site** (About, Careers) | [Wix](https://wix.com) free | $0 |
 | **DocuMint app** (OCR, chat, news) | [Render](https://render.com) free | $0 |
-| Code | GitHub free | $0 |
+| Code | Your personal GitHub account | $0 |
 
-- **Wix guide:** [WIX.md](WIX.md) — build yaworldu.wixsite.com, link to the app
+- **Wix guide:** [WIX.md](WIX.md) — Yaworldu company pages
 - **App deploy:** [DEPLOY.md](DEPLOY.md) — push to GitHub, deploy on Render
 
 ## Supported documents

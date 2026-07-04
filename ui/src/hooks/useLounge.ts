@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { loungeWsUrl } from '@/lib/api'
+import { isClientOnly, loungeWsUrl } from '@/lib/api'
 import type { ChatMessage, LoungeSession, LoungeUser, PlatformStats } from '@/types'
 import { loadLoungeSession, saveLoungeSession } from '@/types'
 
@@ -55,6 +55,12 @@ export function useLounge() {
   )
 
   useEffect(() => {
+    if (isClientOnly()) {
+      const parsed = parseInt(localStorage.getItem('documint-parsed-count') ?? '0', 10)
+      setStats({ active_users: 1, documents_parsed: parsed, languages_seen: 1, messages_today: 0 })
+      return
+    }
+
     let alive = true
     let retry: ReturnType<typeof setTimeout>
 

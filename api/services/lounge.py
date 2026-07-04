@@ -96,7 +96,7 @@ class LoungeManager:
     async def connect(self, websocket: WebSocket, session_id: str | None, name: str, email: str) -> str:
         sid = session_id or str(uuid.uuid4())
         display = (name or "Guest").strip()[:40] or "Guest"
-        email_clean = (email or f"{sid[:8]}@payleaf.local").strip()[:80]
+        email_clean = (email or f"{sid[:8]}@guest.local").strip()[:80]
 
         async with self._lock:
             self._connections[sid] = websocket

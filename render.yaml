@@ -12,6 +12,6 @@ services:
       - key: SERVE_STATIC
         value: "true"
       - key: CORS_ORIGINS
-        value: "*"
+        value: "https://documint.onrender.com,https://documint.dpdns.org,https://yaworldu.wixsite.com"
       - key: PORT
         value: "8000"

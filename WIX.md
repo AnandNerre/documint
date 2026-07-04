@@ -1,9 +1,7 @@
-# Wix company site + DocuMint app
+# Yaworldu on Wix + DocuMint app
 
-**Yaworldu** = parent company (Wix marketing site — About, Careers)  
-**DocuMint** = the document app (runs on Render)
-
-Users see **DocuMint** in the app. Yaworldu only appears as a small footer line: *"A Yaworldu company"*.
+**DocuMint** = the product (this app — highlighted in the UI)  
+**Yaworldu** = parent company (footer + optional Wix site)
 
 ---
 
@@ -11,31 +9,19 @@ Users see **DocuMint** in the app. Yaworldu only appears as a small footer line:
 
 | Piece | Where | URL example |
 |-------|-------|-------------|
-| Company site | [Wix](https://wix.com) free | `yaworldu.wixsite.com` |
-| DocuMint app | [Render](https://render.com) free | `documint.onrender.com` or `app.yaworldu.qzz.io` |
+| DocuMint app | [Render](https://render.com) free | `documint.onrender.com` |
+| Yaworldu company site | [Wix](https://wix.com) free (+91 OK) | `yaworldu.wixsite.com/documint` |
 
-### Wix (Yaworldu company pages)
+Use your **personal GitHub account** to host the code (not a work org account).
 
-1. Create site at [wix.com](https://wix.com) — name it **Yaworldu**
+### Wix — Yaworldu pages
+
+1. Create site at [wix.com](https://wix.com) — name **Yaworldu**
 2. Pages: Home, About, Careers, Contact
-3. Add button **Launch DocuMint** → link to your Render URL
+3. Button **Launch DocuMint** → your Render URL
 
-### Render (DocuMint app)
+### Render — DocuMint app
 
-See [DEPLOY.md](DEPLOY.md) — push repo to GitHub, deploy Blueprint.
+See [DEPLOY.md](DEPLOY.md).
 
-### Optional: embed app in Wix
-
-```html
-<iframe
-  src="https://YOUR-RENDER-URL.onrender.com"
-  width="100%"
-  height="900"
-  style="border:none;border-radius:12px;"
-  title="DocuMint"
-></iframe>
-```
-
----
-
-**Total cost: $0**
+**Cost: $0**

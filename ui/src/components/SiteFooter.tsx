@@ -1,23 +1,26 @@
-import { Layers, Mail } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Globe2, Layers, Mail, MapPin } from 'lucide-react'
+
+import { liveAppUrl, SITE } from '@/lib/site'
 
 const LINKS = {
   product: [
-    { label: 'How it works', href: '#how' },
-    { label: 'Security', href: '#security' },
-    { label: 'Pricing', href: '#pricing' },
-    { label: 'Support', href: '#contact' },
+    { label: 'DocuMint', to: '/' },
+    { label: 'How it works', to: '/#how' },
+    { label: 'Pricing', to: '/pricing' },
+    { label: 'Security', to: '/privacy' },
   ],
   company: [
-    { label: 'About', href: '#about' },
-    { label: 'Careers', href: '#careers' },
-    { label: 'Press', href: '#press' },
-    { label: 'Blog', href: '#blog' },
+    { label: 'About Yaworldu', to: '/about' },
+    { label: 'Careers', to: '/careers' },
+    { label: 'Press', to: '/press' },
+    { label: 'Blog', to: '/blog' },
   ],
   legal: [
-    { label: 'Privacy Policy', href: '#privacy' },
-    { label: 'Terms of Service', href: '#terms' },
-    { label: 'Cookie Policy', href: '#cookies' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Privacy Policy', to: '/privacy' },
+    { label: 'Terms of Service', to: '/terms' },
+    { label: 'Cookie Policy', to: '/cookies' },
+    { label: 'Contact', to: '/contact' },
   ],
 }
 
@@ -32,16 +35,29 @@ export function SiteFooter() {
                 <Layers className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-lg font-extrabold tracking-tight text-slate-900">DocuMint</p>
+                <p className="text-lg font-extrabold tracking-tight text-slate-900">{SITE.product}</p>
                 <p className="text-[11px] font-medium text-slate-500">Document intelligence</p>
               </div>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-slate-500">
-              Read any document, any language. Extract fields, export clean spreadsheets — private and free.
+              Read any document, any language. Free, private, and built to help everyone.
             </p>
-            <p className="mt-4 flex items-center gap-2 text-xs text-slate-400">
-              <Mail className="h-3.5 w-3.5" /> hello@documint.app
-            </p>
+            <div className="mt-4 space-y-1.5 text-xs text-slate-400">
+              <p className="flex items-center gap-2">
+                <Mail className="h-3.5 w-3.5" /> {SITE.email}
+              </p>
+              <p className="flex items-center gap-2">
+                <MapPin className="h-3.5 w-3.5" /> {SITE.location}
+              </p>
+              <a
+                href={liveAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-violet-600 hover:underline"
+              >
+                <Globe2 className="h-3.5 w-3.5" /> {liveAppUrl().replace('https://', '')}
+              </a>
+            </div>
           </div>
 
           {Object.entries(LINKS).map(([group, items]) => (
@@ -52,9 +68,12 @@ export function SiteFooter() {
               <ul className="mt-4 space-y-2.5">
                 {items.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="text-sm font-medium text-slate-600 transition hover:text-violet-600">
+                    <Link
+                      to={link.to}
+                      className="text-sm font-medium text-slate-600 transition hover:text-violet-600"
+                    >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -63,11 +82,10 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-8">
+          <p className="text-xs text-slate-400">© {new Date().getFullYear()} {SITE.company}. All rights reserved.</p>
           <p className="text-xs text-slate-400">
-            © {new Date().getFullYear()} DocuMint. All rights reserved.
-          </p>
-          <p className="text-[11px] text-slate-400">
-            A <span className="font-medium text-slate-500">Yaworldu</span> company
+            <span className="font-semibold text-slate-600">{SITE.product}</span> by{' '}
+            <span className="font-semibold text-slate-600">{SITE.company}</span>
           </p>
         </div>
       </div>

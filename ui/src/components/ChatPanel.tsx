@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MessageCircle, Send, Users } from 'lucide-react'
 
+import { isClientOnly } from '@/lib/api'
 import type { ChatMessage, LoungeUser } from '@/types'
 
 interface ChatPanelProps {
@@ -31,7 +32,7 @@ export function ChatPanel({
   const handleJoin = (e: React.FormEvent) => {
     e.preventDefault()
     if (!name.trim()) return
-    onJoin(name.trim(), email.trim() || `${name.trim().toLowerCase().replace(/\s/g, '')}@documint.app`)
+    onJoin(name.trim(), email.trim() || `${name.trim().toLowerCase().replace(/\s/g, '')}@guest.local`)
   }
 
   const handleSend = (e: React.FormEvent) => {
@@ -41,8 +42,15 @@ export function ChatPanel({
     setDraft('')
   }
 
+  const browserOnly = isClientOnly()
+
   return (
     <div className="flex h-full min-h-0 flex-col">
+      {browserOnly && (
+        <p className="border-b border-white/5 bg-slate-800/80 px-4 py-2 text-[11px] leading-relaxed text-slate-400">
+          GitHub Pages mode — documents are processed in your browser. Live chat needs a self-hosted server.
+        </p>
+      )}
       <div className="flex items-center justify-between border-b border-white/5 px-4 py-3.5">
         <div className="flex items-center gap-2">
           <MessageCircle className="h-4 w-4 text-emerald-400" />
@@ -54,20 +62,20 @@ export function ChatPanel({
         </span>
       </div>
 
-      {!sessionName ? (
+      {!browserOnly && !sessionName ? (
         <form onSubmit={handleJoin} className="space-y-2.5 border-b border-white/5 p-4">
           <p className="text-[11px] text-slate-400">Join with name &amp; email — no password</p>
           <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="sidebar-input w-full" required />
           <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email (optional)" type="email" className="sidebar-input w-full" />
           <button type="submit" className="sidebar-btn w-full">Join chat</button>
         </form>
-      ) : (
+      ) : !browserOnly && sessionName ? (
         <div className="border-b border-white/5 px-4 py-2.5">
           <p className="text-[11px] text-slate-400">
             Hi, <span className="font-semibold text-emerald-300">{sessionName}</span>
           </p>
         </div>
-      )}
+      ) : null}
 
       {online.length > 0 && (
         <div className="flex gap-1.5 overflow-x-auto border-b border-white/5 px-4 py-2">
@@ -83,7 +91,11 @@ export function ChatPanel({
       <div className="min-h-0 flex-1 space-y-2 overflow-y-auto p-4">
         {messages.length === 0 && (
           <p className="text-center text-xs leading-relaxed text-slate-500">
-            {connected ? 'Say hello to others using DocuMint.' : 'Connecting…'}
+            {browserOnly
+              ? 'Document upload works in the main panel — your files stay on your device.'
+              : connected
+                ? 'Say hello to others using DocuMint.'
+                : 'Connecting…'}
           </p>
         )}
         {messages.map((m) => (
@@ -94,7 +106,7 @@ export function ChatPanel({
         ))}
       </div>
 
-      {sessionName && (
+      {!browserOnly && sessionName && (
         <form onSubmit={handleSend} className="flex gap-2 border-t border-white/5 p-3">
           <input
             value={draft}
