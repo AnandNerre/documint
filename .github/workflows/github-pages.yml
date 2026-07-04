@@ -26,6 +26,17 @@ jobs:
           cache: npm
           cache-dependency-path: ui/package-lock.json
 
+      - name: Resolve base path
+        id: basepath
+        run: |
+          REPO="${{ github.event.repository.name }}"
+          OWNER="${{ github.repository_owner }}"
+          if [ "$REPO" = "${OWNER}.github.io" ]; then
+            echo "base=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "base=/${REPO}/" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Install & build
         working-directory: ui
         run: |
@@ -33,7 +44,7 @@ jobs:
           npm run build:gh
         env:
           VITE_CLIENT_ONLY: 'true'
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_BASE_PATH: ${{ steps.basepath.outputs.base }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

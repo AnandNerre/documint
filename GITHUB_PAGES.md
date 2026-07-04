@@ -5,10 +5,16 @@
 Your live URL will be:
 
 ```
-https://YOUR_GITHUB_USERNAME.github.io/documint/
+https://YOUR_GITHUB_USERNAME.github.io/
 ```
 
-(Replace `documint` with your repo name if different.)
+Use a repo named **`YOUR_GITHUB_USERNAME.github.io`** for the shortest link (no `/documint` path).
+
+Or with a project repo named `documint`:
+
+```
+https://YOUR_GITHUB_USERNAME.github.io/documint/
+```
 
 ---
 
