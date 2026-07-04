@@ -1,10 +1,10 @@
-# Payleaf
+# DocuMint
 
-**Payleaf** — a free, private document reader and parser.
+**DocuMint** — read any document, any language. Private OCR, smart parsing, Excel export.
+
+Part of the [Yaworldu](https://github.com) family (parent company — only shown in the site footer).
 
 Upload any document (PDF or image) → open-source OCR reads the text → smart pattern matching pulls out fields → review on screen → download Excel.
-
-Works with payroll slips, invoices, tax forms, bank statements, receipts, and more.
 
 No API keys. No login. No cloud AI. Files are never stored.
 
@@ -47,9 +47,9 @@ POPPLER_PATH=C:\path\to\poppler\Library\bin
 | POST | `/extract` | Upload file → JSON fields |
 | POST | `/export` | JSON → `.xlsx` download |
 
-## What is Payleaf?
+## What is DocuMint?
 
-Payleaf is a **local web app** — you open it in your browser (Chrome, Edge, etc.) on your own computer.
+DocuMint is a **local web app** — you open it in your browser on your own computer.
 
 | What it is | What it is NOT (yet) |
 |------------|----------------------|
@@ -61,15 +61,14 @@ Payleaf is a **local web app** — you open it in your browser (Chrome, Edge, et
 
 ## Deploy online for free ($0)
 
-No server, no app store needed. Push to **GitHub** and deploy on **Render.com** (free):
+| What | Where | Cost |
+|------|-------|------|
+| **Company site** (About, Careers) | [Wix](https://wix.com) free → `yaworldu.wixsite.com` | $0 |
+| **DocuMint app** (OCR, chat, news) | [Render](https://render.com) free | $0 |
+| Code | GitHub free | $0 |
 
-1. Create a GitHub repo and push this project
-2. Go to [render.com](https://render.com) → **New Blueprint** → connect repo
-3. You get a public URL like `https://payleaf.onrender.com`
-
-Full step-by-step guide: **[DEPLOY.md](DEPLOY.md)**
-
-Also works on **Fly.io** (free tier). GitHub Pages / Netlify static hosting alone won't run the OCR backend — you need Docker hosting (Render or Fly).
+- **Wix guide:** [WIX.md](WIX.md) — build yaworldu.wixsite.com, link to the app
+- **App deploy:** [DEPLOY.md](DEPLOY.md) — push to GitHub, deploy on Render
 
 ## Supported documents
 

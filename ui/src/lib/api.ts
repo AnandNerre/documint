@@ -55,7 +55,7 @@ export async function downloadExcel(fields: SalarySlipFields): Promise<void> {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = 'payleaf-export.xlsx'
+  a.download = 'documint-export.xlsx'
   a.click()
   URL.revokeObjectURL(url)
 }

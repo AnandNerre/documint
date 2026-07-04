@@ -1,8 +1,8 @@
-# Deploy Payleaf for free
+# Deploy DocuMint for free
 
 You do **not** need a server, app store, or credit card for most of this. Everything below is **$0/month** on the free tier.
 
-Payleaf ships as **one Docker container** (website + API + OCR). Easiest path: **GitHub + Render**.
+DocuMint ships as **one Docker container** (website + API + OCR). Easiest path: **GitHub + Render**.
 
 ---
 
@@ -127,3 +127,67 @@ Render (free)  →  New Blueprint → connect repo → live URL
 ```
 
 No server to buy. No app store. Share the Render URL and anyone can use Payleaf.
+
+---
+
+## Free custom domain (DigitalPlat FreeDomain)
+
+Yes — you can use [DigitalPlat FreeDomain](https://github.com/DigitalPlatDev/FreeDomain) to get a **free domain** for Yaworldu instead of only `payleaf.onrender.com` or `yaworldu.wixsite.com`.
+
+**Dashboard:** [domain.digitalplat.org](https://domain.digitalplat.org)
+
+### Available extensions (free)
+
+| Extension | Example for Yaworldu |
+|-----------|----------------------|
+| `.qzz.io` | `yaworldu.qzz.io` |
+| `.us.kg` | `yaworldu.us.kg` |
+| `.dpdns.org` | `yaworldu.dpdns.org` |
+| `.xx.kg` | `yaworldu.xx.kg` |
+| `.qd.je` | `yaworldu.qd.je` |
+
+These are real DNS domains — not as well-known as `.com`, but **free** and fine for a startup project. The project is maintained by the [DigitalPlat Foundation](https://github.com/DigitalPlatDev/FreeDomain) and used by 500k+ registrations.
+
+### How to connect to Render (after app is deployed)
+
+1. **Register domain** at [domain.digitalplat.org](https://domain.digitalplat.org)  
+   Pick something like `yaworldu.qzz.io`
+
+2. **In DigitalPlat DNS settings**, add:
+   | Type | Name | Value |
+   |------|------|-------|
+   | `CNAME` | `@` or `www` | `your-app-name.onrender.com` |
+
+   (Exact UI may vary — some extensions use Cloudflare or FreeDNS; follow their dashboard tutorial.)
+
+3. **In Render dashboard** → your Payleaf service → **Settings** → **Custom Domains**  
+   Add `yaworldu.qzz.io` (your chosen domain)
+
+4. **Update Render env** (optional):
+   ```
+   CORS_ORIGINS=https://yaworldu.qzz.io
+   ```
+
+5. Wait 5–30 min for DNS to propagate. Your app will be at `https://yaworldu.qzz.io`
+
+### Wix + free domain together
+
+| Piece | URL |
+|-------|-----|
+| Company marketing site | Wix → `yaworldu.wixsite.com` **or** point free domain to Wix |
+| Payleaf app | Render + free domain → `app.yaworldu.qzz.io` or root domain |
+
+You can use a **subdomain** pattern:
+- `yaworldu.qzz.io` → Wix (company home)
+- `app.yaworldu.qzz.io` → Render (Payleaf app)
+
+### Things to know
+
+| Good | Caveat |
+|------|--------|
+| $0, no credit card | Not `.com` — some users may find `.qzz.io` less familiar |
+| Works with Render HTTPS | Free tiers can have usage/abuse policies — use legitimately |
+| 500k+ people use it | Renewal rules — check [DigitalPlat FAQ](https://github.com/DigitalPlatDev/FreeDomain) on their site |
+
+**Security:** DigitalPlat warns their old Telegram was compromised — use only the [official dashboard](https://domain.digitalplat.org) and [GitHub repo](https://github.com/DigitalPlatDev/FreeDomain), not random Telegram promos.
+

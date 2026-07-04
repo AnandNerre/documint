@@ -1,4 +1,4 @@
-"""Payleaf API — free OCR + rule-based document parsing + live lounge."""
+"""DocuMint API — free OCR + rule-based document parsing + live lounge."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ from services.news import get_headlines
 from services.ocr import extract_text, tesseract_available
 
 app = FastAPI(
-    title="Payleaf API",
+    title="DocuMint API",
     version="1.1.0",
     description="Upload any document → free OCR → smart parsing → Excel export",
 )
@@ -104,7 +104,7 @@ def export_excel(payload: SalarySlipFields) -> Response:
     return Response(
         content=xlsx,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        headers={"Content-Disposition": 'attachment; filename="payleaf-export.xlsx"'},
+        headers={"Content-Disposition": 'attachment; filename="documint-export.xlsx"'},
     )
 
 

@@ -35,6 +35,42 @@ body {
   display: flex;
 }
 
+.left-panel {
+  flex: 1;
+  min-width: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 0%, rgba(124, 58, 237, 0.06), transparent),
+    radial-gradient(ellipse 50% 40% at 90% 10%, rgba(99, 102, 241, 0.05), transparent),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  position: relative;
+}
+
+.left-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, black, transparent 85%);
+}
+
+.right-rail {
+  width: 340px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.right-rail-chat,
+.right-rail-news {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .main-panel {
   flex: 1;
   min-width: 0;
@@ -139,7 +175,7 @@ body {
 }
 
 .hero-glow {
-  background: linear-gradient(135deg, #059669 0%, #10b981 40%, #6366f1 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #6366f1 40%, #10b981 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -184,18 +220,14 @@ body {
   border-radius: 4px;
 }
 
+@media (max-width: 1023px) {
+  .right-rail {
+    display: none !important;
+  }
+}
+
 @media (max-width: 900px) {
   .app-shell {
     flex-direction: column;
-  }
-  .sidebar-panel {
-    width: 100% !important;
-    max-height: 360px;
-    border-left: none !important;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    order: 2;
-  }
-  .main-panel {
-    order: 1;
   }
 }

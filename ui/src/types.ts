@@ -105,7 +105,7 @@ export const EMPTY_FIELDS: SalarySlipFields = {
   confidence_notes: null,
 }
 
-const SESSION_KEY = 'payleaf-lounge-session'
+const SESSION_KEY = 'documint-lounge-session'
 
 export function loadLoungeSession(): LoungeSession | null {
   try {

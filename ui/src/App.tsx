@@ -6,7 +6,7 @@ import {
   Eye,
   FileText,
   Languages,
-  Leaf,
+  Layers,
   Loader2,
   RefreshCw,
   ScanText,
@@ -16,8 +16,9 @@ import {
   Zap,
 } from 'lucide-react'
 
-import { LoungeSidebar } from '@/components/LoungeSidebar'
-import { NewsPanel, NewsTicker } from '@/components/NewsFeed'
+import { RightRail } from '@/components/RightRail'
+import { NewsTicker } from '@/components/NewsFeed'
+import { SiteFooter } from '@/components/SiteFooter'
 import { UploadZone } from '@/components/UploadZone'
 import { ResultsForm } from '@/components/ResultsForm'
 import { useLounge } from '@/hooks/useLounge'
@@ -109,92 +110,71 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <div className="main-panel flex min-h-screen min-w-0 flex-1 flex-col">
+      <div className="left-panel flex min-h-screen min-w-0 flex-1 flex-col">
         <NewsTicker />
 
-        <header className="relative z-10 border-b border-slate-200/60 bg-white/70 backdrop-blur-2xl">
-          <div className="flex items-center justify-between gap-4 px-6 py-4 lg:px-8">
+        <header className="relative z-10 border-b border-slate-200/60 bg-white/80 backdrop-blur-2xl">
+          <div className="flex items-center justify-between gap-4 px-6 py-4 lg:px-10">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/25">
-                <Leaf className="h-5 w-5" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-500/30">
+                <Layers className="h-6 w-6" />
               </div>
               <div>
-                <h1 className="text-xl font-extrabold tracking-tight text-slate-900">Payleaf</h1>
-                <p className="text-xs font-medium text-slate-500">Document intelligence</p>
+                <h1 className="text-xl font-extrabold tracking-tight text-slate-900">DocuMint</h1>
+                <p className="text-xs font-medium text-slate-500">Read · parse · export</p>
               </div>
             </div>
             <StatusPill health={health} />
           </div>
         </header>
 
-        <main className="relative z-10 flex-1 px-6 py-8 lg:px-8 lg:py-10">
+        <main className="relative z-10 flex-1 px-6 py-8 lg:px-10 lg:py-10">
           <StepIndicator current={step} />
 
           {error && (
-            <div
-              role="alert"
-              className="mb-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm text-red-800 animate-fade-up"
-            >
+            <div role="alert" className="mb-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm text-red-800 animate-fade-up">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {step === 'upload' && (
-            <section className="animate-fade-up">
-              <div className="grid gap-8 xl:grid-cols-12">
-                <div className="xl:col-span-7">
-                  <Hero stats={lounge.stats} />
-                  <UploadZone
-                    onFile={processFile}
-                    disabled={health?.status === 'offline'}
-                    onError={setError}
-                  />
-                  <FeatureGrid health={health} />
-                  <SetupHints health={health} />
-                </div>
-                <div className="xl:col-span-5">
-                  <div className="sticky top-6">
-                    <NewsPanel />
-                  </div>
-                </div>
-              </div>
+            <section className="animate-fade-up mx-auto max-w-3xl">
+              <Hero stats={lounge.stats} />
+              <UploadZone onFile={processFile} disabled={health?.status === 'offline'} onError={setError} />
+              <FeatureGrid health={health} />
+              <SetupHints health={health} />
             </section>
           )}
 
           {step === 'processing' && (
             <section className="animate-fade-up mx-auto max-w-2xl premium-card flex flex-col items-center justify-center rounded-3xl px-8 py-28">
               <div className="relative">
-                <div className="absolute inset-0 scale-150 rounded-full bg-emerald-400/20 blur-2xl" />
-                <Loader2 className="relative h-14 w-14 animate-spin text-emerald-500" />
+                <div className="absolute inset-0 scale-150 rounded-full bg-violet-400/20 blur-2xl" />
+                <Loader2 className="relative h-14 w-14 animate-spin text-violet-600" />
               </div>
               <p className="mt-8 text-2xl font-bold tracking-tight">{processLabel}</p>
-              <p className="mt-2 text-sm text-slate-500">Private OCR on your machine</p>
+              <p className="mt-2 text-sm text-slate-500">Private OCR · runs securely in your session</p>
               {file && (
-                <p className="mt-6 rounded-full bg-slate-100 px-5 py-2 text-xs font-semibold text-slate-600 ring-1 ring-slate-200">
-                  {file.name}
-                </p>
+                <p className="mt-6 rounded-full bg-slate-100 px-5 py-2 text-xs font-semibold text-slate-600 ring-1 ring-slate-200">{file.name}</p>
               )}
               <div className="relative mt-10 h-2 w-56 overflow-hidden rounded-full bg-slate-100">
-                <div className="progress-shimmer absolute inset-y-0 left-0 w-1/2 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500" />
+                <div className="progress-shimmer absolute inset-y-0 left-0 w-1/2 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500" />
               </div>
             </section>
           )}
 
           {step === 'review' && (
-            <section className="animate-fade-up mx-auto max-w-5xl space-y-6">
+            <section className="animate-fade-up mx-auto max-w-4xl space-y-6">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <h2 className="text-2xl font-extrabold tracking-tight">Extracted data</h2>
                   <p className="mt-1 text-sm text-slate-500">Review, edit, then export.</p>
-                  {meta?.detected_language && (
-                    <LanguageBadge lang={meta.detected_language} />
-                  )}
+                  {meta?.detected_language && <LanguageBadge lang={meta.detected_language} />}
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button type="button" onClick={reset} className="btn-secondary">
-                    <RefreshCw className="h-4 w-4" />
-                    New upload
+                    <RefreshCw className="h-4 w-4" /> New upload
                   </button>
                   <button type="button" onClick={handleExport} disabled={exporting} className="btn-primary">
                     {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
@@ -202,32 +182,27 @@ export default function App() {
                   </button>
                 </div>
               </div>
-
               {fields.confidence_notes && (
                 <div className="flex items-start gap-3 rounded-2xl border border-amber-200/80 bg-amber-50 px-4 py-3.5 text-sm text-amber-900">
                   <ScanText className="mt-0.5 h-4 w-4 shrink-0" />
                   <span>{fields.confidence_notes}</span>
                 </div>
               )}
-
               <ResultsForm fields={fields} onChange={setFields} />
-
               {meta && (
                 <details className="premium-card rounded-2xl p-5 text-sm">
-                  <summary className="cursor-pointer font-semibold text-slate-500">
-                    Source preview · {meta.ocr_method}
-                  </summary>
-                  <pre className="mt-3 max-h-48 overflow-auto whitespace-pre-wrap rounded-xl bg-slate-50 p-4 text-xs leading-relaxed text-slate-500">
-                    {meta.raw_text_preview}
-                  </pre>
+                  <summary className="cursor-pointer font-semibold text-slate-500">Source preview · {meta.ocr_method}</summary>
+                  <pre className="mt-3 max-h-48 overflow-auto whitespace-pre-wrap rounded-xl bg-slate-50 p-4 text-xs leading-relaxed text-slate-500">{meta.raw_text_preview}</pre>
                 </details>
               )}
             </section>
           )}
         </main>
+
+        <SiteFooter />
       </div>
 
-      <LoungeSidebar
+      <RightRail
         connected={lounge.connected}
         sessionName={lounge.session?.name ?? null}
         users={lounge.users}
@@ -239,36 +214,20 @@ export default function App() {
 
       <style>{`
         .btn-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
+          display: inline-flex; align-items: center; gap: 0.5rem;
           border-radius: 0.875rem;
-          background: linear-gradient(135deg, #10b981, #059669);
-          padding: 0.625rem 1.25rem;
-          font-size: 0.875rem;
-          font-weight: 600;
-          color: white;
-          box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+          background: linear-gradient(135deg, #7c3aed, #4f46e5);
+          padding: 0.625rem 1.25rem; font-size: 0.875rem; font-weight: 600; color: white;
+          box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
           transition: transform 0.15s, box-shadow 0.15s;
         }
-        .btn-primary:hover:not(:disabled) {
-          transform: translateY(-1px);
-          box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
-        }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4); }
         .btn-primary:disabled { opacity: 0.6; }
         .btn-secondary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          border-radius: 0.875rem;
-          border: 1px solid #e2e8f0;
-          background: white;
-          padding: 0.625rem 1.25rem;
-          font-size: 0.875rem;
-          font-weight: 600;
-          color: #334155;
-          box-shadow: 0 1px 2px rgba(15,23,42,0.05);
-          transition: background 0.15s;
+          display: inline-flex; align-items: center; gap: 0.5rem;
+          border-radius: 0.875rem; border: 1px solid #e2e8f0; background: white;
+          padding: 0.625rem 1.25rem; font-size: 0.875rem; font-weight: 600; color: #334155;
+          box-shadow: 0 1px 2px rgba(15,23,42,0.05); transition: background 0.15s;
         }
         .btn-secondary:hover { background: #f8fafc; }
       `}</style>
@@ -278,52 +237,49 @@ export default function App() {
 
 function Hero({ stats }: { stats: PlatformStats }) {
   return (
-    <div className="mb-8 text-left sm:mb-10">
-      <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-xs font-bold uppercase tracking-widest text-white shadow-lg">
-        <Sparkles className="h-3.5 w-3.5 text-emerald-400" />
+    <div className="mb-8 text-center sm:mb-10">
+      <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2 text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-violet-500/25">
+        <Sparkles className="h-3.5 w-3.5" />
         Any document · any language
       </div>
       <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl sm:leading-[1.1]">
-        Turn chaos into{' '}
+        Turn documents into{' '}
         <span className="hero-glow">clean data</span>
       </h2>
-      <p className="mt-4 max-w-lg text-base leading-relaxed text-slate-500">
-        Upload while you browse live headlines. Chat with others on the right.
+      <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-slate-500">
+        Upload on the left. Chat and live headlines on the right. Free, fast, and private.
       </p>
-      <div className="mt-6 flex gap-8">
-        <div>
-          <p className="text-2xl font-extrabold tabular-nums text-slate-900">{stats.documents_parsed}</p>
-          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">Docs parsed</p>
-        </div>
-        <div className="h-10 w-px bg-slate-200" />
-        <div>
-          <p className="text-2xl font-extrabold tabular-nums text-slate-900">{stats.languages_seen}</p>
-          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">Languages</p>
-        </div>
-        <div className="h-10 w-px bg-slate-200" />
-        <div>
-          <p className="text-2xl font-extrabold tabular-nums text-slate-900">{stats.active_users}</p>
-          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">Online now</p>
-        </div>
+      <div className="mx-auto mt-8 flex max-w-lg justify-center gap-6 sm:gap-10">
+        <Stat label="Docs parsed" value={stats.documents_parsed} />
+        <Stat label="Languages" value={stats.languages_seen} />
+        <Stat label="Online" value={stats.active_users} />
       </div>
+    </div>
+  )
+}
+
+function Stat({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="text-center">
+      <p className="text-2xl font-extrabold tabular-nums text-slate-900">{value}</p>
+      <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">{label}</p>
     </div>
   )
 }
 
 function FeatureGrid({ health }: { health: HealthResponse | null }) {
   const items = [
-    { icon: Languages, title: 'Auto language', desc: 'Detects what your document is written in — no setup needed.' },
-    { icon: Eye, title: 'Smart read', desc: 'Text PDFs, scans, photos, tables — handled automatically.' },
-    { icon: Shield, title: 'Private', desc: 'Processed on your device. Files are never saved.' },
-    { icon: Zap, title: 'Instant export', desc: 'Review fields, download a polished spreadsheet.' },
+    { icon: Languages, title: 'Auto language', desc: 'Detects your document language instantly.' },
+    { icon: Eye, title: 'Smart parsing', desc: 'PDFs, scans, photos, and tables.' },
+    { icon: Shield, title: 'Private & secure', desc: 'Files processed securely, never stored.' },
+    { icon: Zap, title: 'Excel export', desc: 'One-click polished spreadsheet.' },
   ]
-
   return (
     <div className="mt-8 grid gap-3 sm:grid-cols-2">
       {items.map(({ icon: Icon, title, desc }) => (
         <div key={title} className="feature-tile rounded-2xl p-5">
           <div className="flex items-start gap-3">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 text-emerald-600 ring-1 ring-emerald-100">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-50 to-indigo-50 text-violet-600 ring-1 ring-violet-100">
               <Icon className="h-5 w-5" />
             </div>
             <div>
@@ -360,9 +316,7 @@ function StepIndicator({ current }: { current: Step }) {
     { id: 'processing', label: 'Read', icon: FileText },
     { id: 'review', label: 'Export', icon: Download },
   ] as const
-
   const index = steps.findIndex((s) => s.id === current)
-
   return (
     <ol className="mb-10 flex items-center justify-center gap-3 sm:gap-6">
       {steps.map((s, i) => {
@@ -371,20 +325,13 @@ function StepIndicator({ current }: { current: Step }) {
         const active = s.id === current || (current === 'processing' && s.id === 'processing')
         return (
           <li key={s.id} className="flex items-center gap-2">
-            <span
-              className={`flex h-11 w-11 items-center justify-center rounded-2xl transition-all duration-300 ${
-                active
-                  ? 'bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/30'
-                  : done
-                    ? 'bg-emerald-100 text-emerald-700'
-                    : 'bg-white text-slate-400 ring-1 ring-slate-200'
-              }`}
-            >
+            <span className={`flex h-11 w-11 items-center justify-center rounded-2xl transition-all duration-300 ${
+              active ? 'bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-500/30'
+                : done ? 'bg-violet-100 text-violet-700' : 'bg-white text-slate-400 ring-1 ring-slate-200'
+            }`}>
               {done && s.id !== current ? <CheckCircle2 className="h-4 w-4" /> : <Icon className="h-4 w-4" />}
             </span>
-            <span className={`hidden text-sm font-semibold sm:inline ${active ? 'text-slate-900' : 'text-slate-400'}`}>
-              {s.label}
-            </span>
+            <span className={`hidden text-sm font-semibold sm:inline ${active ? 'text-slate-900' : 'text-slate-400'}`}>{s.label}</span>
             {i < steps.length - 1 && <span className="mx-1 hidden h-px w-8 bg-slate-200 sm:block" />}
           </li>
         )
@@ -397,34 +344,27 @@ function StatusPill({ health }: { health: HealthResponse | null }) {
   if (!health) {
     return (
       <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-xs font-semibold text-slate-500">
-        <span className="h-2 w-2 rounded-full bg-slate-300 animate-pulse-soft" />
-        Checking…
+        <span className="h-2 w-2 rounded-full bg-slate-300 animate-pulse-soft" /> Checking…
       </span>
     )
   }
-
   const ok = health.status === 'ok'
   return (
-    <span
-      className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold ${
-        ok ? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200' : 'bg-amber-50 text-amber-800 ring-1 ring-amber-200'
-      }`}
-    >
-      <span className={`h-2 w-2 rounded-full ${ok ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' : 'bg-amber-500'}`} />
-      {ok ? 'Engine live' : 'Offline'}
+    <span className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold ${
+      ok ? 'bg-violet-50 text-violet-700 ring-1 ring-violet-200' : 'bg-amber-50 text-amber-800 ring-1 ring-amber-200'
+    }`}>
+      <span className={`h-2 w-2 rounded-full ${ok ? 'bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.6)]' : 'bg-amber-500'}`} />
+      {ok ? 'Live' : 'Offline'}
     </span>
   )
 }
 
 function SetupHints({ health }: { health: HealthResponse | null }) {
   if (!health || health.status === 'ok') return null
-
   return (
     <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-950">
-      <p className="font-bold">Start Payleaf</p>
-      <p className="mt-1 text-amber-900/90">
-        Run <code className="rounded bg-white/80 px-1.5 py-0.5 font-mono text-xs">.\start-dev.ps1</code>
-      </p>
+      <p className="font-bold">Start DocuMint locally</p>
+      <p className="mt-1 text-amber-900/90">Run <code className="rounded bg-white/80 px-1.5 py-0.5 font-mono text-xs">.\start-dev.ps1</code></p>
     </div>
   )
 }

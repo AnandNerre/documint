@@ -18,11 +18,11 @@ _CACHE_TTL = 900
 _cache: tuple[float, list[dict]] = (0.0, [])
 
 _FALLBACK: list[dict] = [
-    {"title": "Payleaf is live — upload any document, get structured data instantly", "source": "Payleaf", "url": "#"},
-    {"title": "Auto language detection works on PDFs, scans, and photos", "source": "Payleaf", "url": "#"},
-    {"title": "Join the lounge on the right to chat with others in real time", "source": "Payleaf", "url": "#"},
-    {"title": "Export clean spreadsheets in one click — 100% free", "source": "Payleaf", "url": "#"},
-    {"title": "Your files are processed privately and never stored", "source": "Payleaf", "url": "#"},
+    {"title": "DocuMint is live — upload any document, get structured data", "source": "DocuMint", "url": "#"},
+    {"title": "Auto language detection on PDFs, scans, and photos", "source": "DocuMint", "url": "#"},
+    {"title": "Join community chat on the right while you work", "source": "DocuMint", "url": "#"},
+    {"title": "Export clean spreadsheets in one click — 100% free", "source": "DocuMint", "url": "#"},
+    {"title": "Your files are processed securely and never stored", "source": "DocuMint", "url": "#"},
 ]
 
 
@@ -58,7 +58,7 @@ def _parse_rss(xml: str, source: str) -> list[Headline]:
 def _fetch_feed(source: str, url: str) -> list[Headline]:
     try:
         with httpx.Client(timeout=8.0, follow_redirects=True) as client:
-            res = client.get(url, headers={"User-Agent": "Payleaf/1.0"})
+            res = client.get(url, headers={"User-Agent": "DocuMint/1.0"})
             if res.status_code == 200 and res.text:
                 return _parse_rss(res.text, source)
     except Exception:

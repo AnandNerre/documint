@@ -64,7 +64,7 @@ def build_workbook(fields: SalarySlipFields) -> bytes:
 
     ws.merge_cells("A1:B1")
     title = ws["A1"]
-    title.value = "Payleaf — Document Export"
+    title.value = "DocuMint — Export"
     title.font = header_font
     title.fill = header_fill
     title.alignment = Alignment(horizontal="center", vertical="center")

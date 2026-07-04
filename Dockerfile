@@ -1,4 +1,4 @@
-# Payleaf — single-container deploy (UI + API + OCR)
+# DocuMint — single-container deploy (UI + API + OCR)
 # Free hosting: Render.com, Fly.io, Railway (Docker)
 
 FROM node:22-alpine AS ui-build

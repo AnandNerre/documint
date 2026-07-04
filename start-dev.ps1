@@ -1,8 +1,8 @@
-# Payleaf — local document reader
+# DocuMint — local dev
 $ErrorActionPreference = "Stop"
 $Root = $PSScriptRoot
 
-Write-Host "`n=== Payleaf ===" -ForegroundColor Green
+Write-Host "`n=== DocuMint ===" -ForegroundColor Green
 
 # API venv
 $venv = Join-Path $Root "api\.venv"
