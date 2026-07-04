@@ -1,4 +1,4 @@
-# Payleaf — local dev
+# Payleaf — local document reader
 $ErrorActionPreference = "Stop"
 $Root = $PSScriptRoot
 

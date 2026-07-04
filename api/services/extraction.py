@@ -1,4 +1,4 @@
-"""Field extraction entry point — delegates to open-source payslip parser."""
+"""Field extraction entry point — delegates to open-source document parser."""
 
 from schemas import SalarySlipFields
 from services.payslip_parser import extract_fields as parse_payslip

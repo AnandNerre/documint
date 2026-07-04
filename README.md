@@ -1,12 +1,12 @@
 # Payleaf
 
-**Payleaf** — a free, private payslip reader for India.
+**Payleaf** — a free, private document reader and parser.
 
-Upload a payslip (PDF or image) → open-source OCR reads the text → smart pattern matching pulls out fields → review on screen → download Excel.
+Upload any document (PDF or image) → open-source OCR reads the text → smart pattern matching pulls out fields → review on screen → download Excel.
+
+Works with payroll slips, invoices, tax forms, bank statements, receipts, and more.
 
 No API keys. No login. No cloud AI. Files are never stored.
-
-**Standalone project** — not related to FinanceAI Mortgage or asc-dataai-fin-mortgage.
 
 ## Quick start
 
@@ -22,14 +22,16 @@ cd payleaf
 
 | Step | Library | Cost |
 |------|---------|------|
-| Text PDFs | pdfplumber | Free |
-| Images / scans | Tesseract OCR | Free |
+| Text PDFs | pdfplumber + pypdf | Free |
+| Table layouts | pdfplumber tables | Free |
+| Images / scans | Tesseract OCR (multi-page) | Free |
+| Image cleanup | Pillow preprocessing | Free |
 | Field extraction | Rule-based parser (regex + labels) | Free |
 | Excel export | openpyxl | Free |
 
 ## Optional: Tesseract (for photos & scanned PDFs)
 
-Text-based PDFs work out of the box. For images or scanned slips, install [Tesseract](https://github.com/UB-Mannheim/tesseract/wiki):
+Text-based PDFs work out of the box. For images or scanned documents, install [Tesseract](https://github.com/UB-Mannheim/tesseract/wiki):
 
 ```env
 # api/.env
@@ -55,19 +57,30 @@ Payleaf is a **local web app** — you open it in your browser (Chrome, Edge, et
 | Python backend on your PC | Cloud service you log into |
 | Free, private, no API keys | Desktop `.exe` installer |
 
-**How you use it:** run `start-dev.ps1` → open http://127.0.0.1:5180 → upload payslip → download Excel.
+**How you use it locally:** run `start-dev.ps1` → browser opens at `http://127.0.0.1:5180` → upload a document → download Excel.
 
-## Project structure
+## Deploy online for free ($0)
 
-```
-payleaf/
-├── api/          FastAPI backend (OCR + parsing + Excel)
-├── ui/           React + Vite + Tailwind frontend
-└── start-dev.ps1 Local dev launcher
-```
+No server, no app store needed. Push to **GitHub** and deploy on **Render.com** (free):
+
+1. Create a GitHub repo and push this project
+2. Go to [render.com](https://render.com) → **New Blueprint** → connect repo
+3. You get a public URL like `https://payleaf.onrender.com`
+
+Full step-by-step guide: **[DEPLOY.md](DEPLOY.md)**
+
+Also works on **Fly.io** (free tier). GitHub Pages / Netlify static hosting alone won't run the OCR backend — you need Docker hosting (Render or Fly).
+
+## Supported documents
+
+- **Types:** payroll slips, invoices, tax forms, bank statements, receipts, letters
+- **Currencies:** USD, EUR, GBP, INR, AED, SAR, SGD, CAD, AUD, MYR, PHP, ZAR, NGN and more
+- **Labels:** names, dates, amounts, deductions (English labels)
+- **Files:** PDF (text or scanned), PNG, JPG, WEBP, TIFF
+- **Security:** password-protected PDFs are detected with a clear error message
 
 ## Limits (v1)
 
-- Indian payslip layouts (English labels)
+- English-label document layouts
 - Single file at a time
 - Unusual formats may need manual edits — that's expected without paid AI

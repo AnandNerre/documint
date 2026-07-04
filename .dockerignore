@@ -1,0 +1,10 @@
+ui/node_modules
+ui/dist
+api/.venv
+api/.env
+api/static
+.git
+**/__pycache__
+**/*.pyc
+.cursor
+terminals
