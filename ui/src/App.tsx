@@ -289,8 +289,7 @@ function SetupHints({ health }: { health: HealthResponse | null }) {
       <p className="font-medium">Start Payleaf locally</p>
       <ul className="mt-2 list-inside list-disc space-y-1 text-amber-900/90">
         <li>
-          Run{' '}
-          <code className="rounded bg-white/70 px-1">salary_slip_extractor/start-dev.ps1</code>
+          Run <code className="rounded bg-white/70 px-1">.\start-dev.ps1</code> from the payleaf folder
         </li>
         {!health.tesseract_available && (
           <li>
